@@ -83,12 +83,13 @@ Radiation::Radiation(MeshBlockPack *ppack, ParameterInput *pin) :
     rad_source = false;
   }
 
+  table_opacity = pin->GetOrAddBoolean("radiation","table_opacity",false);
   // Set radiation coupling parameters including scattering and absorption opacities,
   // radiation constant, and source term behavior.
   if (rad_source) {
     kappa_s = pin->GetReal("radiation","kappa_s");
     power_opacity = pin->GetOrAddBoolean("radiation","power_opacity",false);
-    if (!(power_opacity)) {
+    if (!(power_opacity) && !(table_opacity)) {
       kappa_a = pin->GetReal("radiation","kappa_a");
       kappa_p = pin->GetReal("radiation","kappa_p");
     }
@@ -216,7 +217,7 @@ Radiation::Radiation(MeshBlockPack *ppack, ParameterInput *pin) :
     }
   }
 
-  table_opacity = pin->GetOrAddBoolean("radiation","table_opacity",false);
+
 
   if ((table_opacity)){
     op_table_use_r = pin->GetOrAddBoolean("radiation","table_use_r",false);
