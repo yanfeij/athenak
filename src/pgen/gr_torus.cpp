@@ -228,6 +228,13 @@ void ProblemGenerator::UserProblem(ParameterInput *pin, const bool restart) {
         }
       }
 
+
+      for(int j=0; j<ross_table_len_y_; ++j){
+        for(int i=0; i<ross_table_len_x_; ++i){
+          fscanf(fplanck,"%lf",&(pmbp->prad->planck_table.h_view(j,i)));
+        }
+      }
+
       fclose(fkappa);
       fclose(flogt);
       fclose(flogr);
